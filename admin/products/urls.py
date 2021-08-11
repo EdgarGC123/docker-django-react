@@ -2,9 +2,13 @@ from products.models import Product
 from django.contrib import admin
 from django.urls import path
 
-from .views import ProductGenericAPIView
+from django.conf import settings
+from django.conf.urls.static import static
+
+from .views import ProductGenericAPIView, FileUploadView
 
 urlpatterns = [
     path('products', ProductGenericAPIView.as_view()),
     path('products/<str:pk>', ProductGenericAPIView.as_view()),
-]
+    path('upload', FileUploadView.as_view())
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

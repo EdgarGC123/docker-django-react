@@ -1,3 +1,4 @@
+from users.permissions import ViewPermissions
 from rest_framework import exceptions, viewsets, status, generics, mixins
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view
@@ -94,7 +95,7 @@ class PermissionAPIView(APIView):
 
 class RoleViewSet(viewsets.ViewSet):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated & ViewPermissions]
 
     def list(self, request):
         serializer = RoleSerializer(Role.objects.all(), many=True)
@@ -138,7 +139,9 @@ class RoleViewSet(viewsets.ViewSet):
 
 class UserGenericAPIView(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated & ViewPermissions]
+
+    permission_object = 'users'
 
     queryset = User.objects.all()
     serializer_class = UserSerializer
