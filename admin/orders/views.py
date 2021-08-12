@@ -11,12 +11,16 @@ from .models import Order, OrderItem
 from rest_framework.response import Response
 from admin.pagination import CustomPagination
 
+# from users.permissions import ViewPermissions
+
 import csv
 
 
 class OrderGenericAPIView(generics.GenericAPIView, mixins.ListModelMixin, mixins.RetrieveModelMixin):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated & ViewPermissions]
+    # permission_object = "orders"
 
     queryset = Order.objects.all()
 
@@ -40,7 +44,7 @@ class ExportAPIView(APIView):
         response['Content-Disposition'] = 'attachment; filename=orders.csv'
 
         orders = Order.objects.all()
-        writer = csv.writer(reponse)
+        writer = csv.writer(response)
 
         writer.writerow(
             ['ID', 'Name', 'Email', 'Product Title', 'Price', 'Quantity'])

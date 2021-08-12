@@ -10,10 +10,14 @@ from rest_framework import generics, mixins
 from rest_framework.parsers import MultiPartParser
 from django.core.files.storage import default_storage
 
+# from users.permissions import ViewPermissions
+
 
 class ProductGenericAPIView(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated & ViewPermissions]
+    # permission_object = "products"
 
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
