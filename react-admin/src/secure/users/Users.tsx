@@ -8,13 +8,42 @@ export default class Users extends Component {
     state = {
         users: []
     }
-    componentDidMount = async () => {
-        const response = await axios.get('users')
+    page = 1;
+    last_page=0;
 
-        await console.log(response)
+    componentDidMount = async () => {
+        const response = await axios.get(`users?page=${this.page}`);
+
+        console.log(response)
         this.setState({
             users: response.data.data
         })
+
+        this.last_page = response.data.meta.last_page
+
+    }
+
+    next = async () => {
+        if(this.page === this.last_page) return;
+        this.page++;
+        await this.componentDidMount();
+    }
+    previous = async () =>{
+        if(this.page === 1 ) return;
+        this.page--;
+        await this.componentDidMount();
+    }
+
+    delete = async (id: number) =>{
+        if(window.confirm('Are you sure you want to delete this record?')){
+            await axios.delete(`users/${id}`);
+
+            // this.setState({
+            //     users: this.state.users.filter((u: User) => u.id !== id)
+            // })
+            this.componentDidMount();
+        }
+
     }
 
     render() {
@@ -47,7 +76,7 @@ export default class Users extends Component {
                                 <td>
                                     <div className="bt-group mr-2">
                                         <a href="#" className="btn btn-sm btn-outline-secondary">Edit</a>
-                                        <a href="#" className="btn btn-sm btn-outline-secondary">Delete</a>
+                                        <a href="#" className="btn btn-sm btn-outline-secondary" onClick={() => this.delete(user.id)} >Delete</a>
                                     </div>
                                 </td>
                             </tr>
@@ -55,6 +84,16 @@ export default class Users extends Component {
                     </tbody>
                   </table>
                   </div>
+                  <nav>
+                      <ul className="pagination">
+                          <li className="page-item">
+                            <a href="#" className="page-link" onClick={this.previous}>Previous</a>
+                          </li>
+                          <li className="page-item">
+                            <a href="#" className="page-link" onClick={this.next}>Next</a>
+                          </li>
+                      </ul>
+                  </nav>
             </Wrapper>
         )
     }

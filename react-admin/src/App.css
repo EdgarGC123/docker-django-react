@@ -104,12 +104,12 @@ body {
 
 .table-adjust {
 	position: relative;
-	left: 15vw;
+	left: 25vw;
 	top: 10vh;
 }
-.navbar {
+/* .navbar {
 	width: 100vw;
 	margin: 0 auto;
 	position: absolute;
 	left: 0;
-}
+} */

@@ -96,6 +96,7 @@ class PermissionAPIView(APIView):
 class RoleViewSet(viewsets.ViewSet):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated & ViewPermissions]
+    permission_object = "roles"
 
     def list(self, request):
         serializer = RoleSerializer(Role.objects.all(), many=True)
