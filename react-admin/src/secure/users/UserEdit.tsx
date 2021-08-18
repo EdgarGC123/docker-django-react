@@ -22,16 +22,13 @@ export default class UserEdit extends Component<{match: PropsWithRef<any>}> {
 
     componentDidMount = async () =>{
 
+        this.id = this.props.match.params.id;
+
         const rolesCall = await axios.get('roles');
 
         const userCall = await axios.get(`users/${this.id}`)
 
         const user: User = userCall.data.data
-
-        
-        this.id = this.props.match.params.id;
-
-        console.log(this.id)
 
         this.setState({
             first_name: user.first_name,
@@ -75,8 +72,12 @@ export default class UserEdit extends Component<{match: PropsWithRef<any>}> {
                         <label>Role</label>
                         <select name="role_id" className="form-control"
                                 value={this.state.role_id}
-                                onChange={e => this.role_id = parseInt(e.target.value)}
-                        >
+                                onChange={e => {
+                                    this.role_id = parseInt(e.target.value)
+                                    this.setState({
+                                        role_id: this.role_id
+                                    })
+                                }}>
                             <option>Select Role</option>
                             {this.state.roles.map(
                                 (role: Role) => {
