@@ -2,10 +2,12 @@ import React, { Component, SyntheticEvent } from 'react'
 import Wrapper from '../Wrapper'
 import axios from 'axios'
 import { Role } from '../../classes/role'
+import { Redirect } from 'react-router-dom'
 
 export default class UserCreate extends Component {
     state = {
-        roles: []
+        roles: [],
+        redirect: false
     }
     first_name='';
     last_name='';
@@ -18,18 +20,25 @@ export default class UserCreate extends Component {
             roles: response.data.data
         })
     }
-    submit = (e: SyntheticEvent)=>{
+    submit = async (e: SyntheticEvent)=>{
         e.preventDefault();
 
-        console.log({
+        await axios.post('users', {
             first_name: this.first_name,
             last_name: this.last_name,
             email: this.email,
             role_id: this.role_id
+        });
+
+        this.setState({
+            redirect: true
         })
 
     }
     render() {
+        if(this.state.redirect){
+            return <Redirect to={'/users'} />;
+        }
         return (
             <Wrapper>
                  <form onSubmit={this.submit}>

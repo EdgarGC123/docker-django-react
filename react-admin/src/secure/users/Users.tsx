@@ -68,14 +68,14 @@ export default class Users extends Component {
                     </thead>
                     <tbody>
                         {this.state.users.map( (user: User) =>(
-                            <tr>
+                            <tr key={user.id}>
                                 <td>{user.id}</td>
                                 <td>{user.first_name} {user.last_name}</td>
                                 <td>{user.email}</td>
                                 <td>{user.role.name}</td>
                                 <td>
                                     <div className="bt-group mr-2">
-                                        <a href="#" className="btn btn-sm btn-outline-secondary">Edit</a>
+                                        <Link to={`/users/${user.id}/edit`} className="btn btn-sm btn-outline-secondary">Edit</Link>
                                         <a href="#" className="btn btn-sm btn-outline-secondary" onClick={() => this.delete(user.id)} >Delete</a>
                                     </div>
                                 </td>
