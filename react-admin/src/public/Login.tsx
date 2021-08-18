@@ -19,6 +19,10 @@ class Login extends Component{
         });
 
         console.log(response);
+
+        this.setState({
+            redirect: true
+        })
     }
     render() {
         if(this.state.redirect){
