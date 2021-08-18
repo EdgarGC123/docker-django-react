@@ -18,7 +18,7 @@ from admin.pagination import CustomPagination
 @api_view(['POST'])
 def register(request):
     data = request.data
-
+    data["role"] = 1
     if data['password'] != data['password_confirm']:
         raise exceptions.APIException('Passwords do not match!')
 
@@ -155,7 +155,7 @@ class UserGenericAPIView(generics.GenericAPIView, mixins.ListModelMixin, mixins.
             })
         return self.list(request)
         # Response({
-        # 'data': self.list(request).data
+        #     'data': self.list(request).data
         # })
 
     def post(self, request):
