@@ -58,7 +58,7 @@ export default class Roles extends Component {
                                         <td>{role.name}</td>
                                         <td>
                                             <div className="bt-group mr-2">
-                                            <Link to={`/users/${role.id}/edit`} className="btn btn-sm btn-outline-secondary">Edit</Link>
+                                            <Link to={`/roles/${role.id}/edit`} className="btn btn-sm btn-outline-secondary">Edit</Link>
                                             {role.id == 1 || role.id == 2 || role.id==3 ? null : <a className="btn btn-sm btn-outline-secondary" onClick={()=> this.delete(role.id)}>Delete</a>}                                 </div>
                                         </td>
                                     </tr>
