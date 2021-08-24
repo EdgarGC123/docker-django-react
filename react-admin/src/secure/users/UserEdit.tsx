@@ -40,6 +40,12 @@ export default class UserEdit extends Component<{match: PropsWithRef<any>}> {
         })
     }
 
+    // onChange = (e: SyntheticEvent) =>{
+    //     this.setState({
+    //         [e.target.name]: e.target.value
+    //     })
+    // }
+
     submit = async (e: SyntheticEvent) =>{
         e.preventDefault();
 

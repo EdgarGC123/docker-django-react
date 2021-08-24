@@ -11,12 +11,13 @@ export default class Wrapper extends Component {
     componentDidMount = async () =>{
         try{
             const response = await axios.get('user');
-            console.log("response",response)
+            console.log("USER response",response)
         } catch(e){
             this.setState({
                 redirect: true
             })
         }
+
     }
     render() {
         if(this.state.redirect){
