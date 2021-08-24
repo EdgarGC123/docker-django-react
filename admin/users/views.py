@@ -169,9 +169,9 @@ class UserGenericAPIView(generics.GenericAPIView, mixins.ListModelMixin, mixins.
         })
 
     def put(self, request, pk=None):
-        if request.data['role_id']:
+        if request.data.get('role_id'):
             request.data.update({
-                'role': request.data['role_id']
+                'role': request.data['role_id'],
             })
 
         return Response({
