@@ -76,7 +76,7 @@ export default class Users extends Component {
                                 <td>
                                     <div className="bt-group mr-2">
                                         <Link to={`/users/${user.id}/edit`} className="btn btn-sm btn-outline-secondary">Edit</Link>
-                                        <a href="#" className="btn btn-sm btn-outline-secondary" onClick={() => this.delete(user.id)} >Delete</a>
+                                        <a className="btn btn-sm btn-outline-secondary" onClick={() => this.delete(user.id)} >Delete</a>
                                     </div>
                                 </td>
                             </tr>
@@ -87,10 +87,10 @@ export default class Users extends Component {
                   <nav>
                       <ul className="pagination">
                           <li className="page-item">
-                            <a href="#" className="page-link" onClick={this.previous}>Previous</a>
+                            <a className="page-link" onClick={this.previous}>Previous</a>
                           </li>
                           <li className="page-item">
-                            <a href="#" className="page-link" onClick={this.next}>Next</a>
+                            <a className="page-link" onClick={this.next}>Next</a>
                           </li>
                       </ul>
                   </nav>
