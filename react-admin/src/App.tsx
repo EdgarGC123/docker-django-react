@@ -13,7 +13,7 @@ import UserEdit from './secure/users/UserEdit';
 import Roles from './secure/roles/Roles';
 import RoleCreate from './secure/roles/RoleCreate';
 import RoleEdit from './secure/roles/RoleEdit';
-import products from './secure/products/products';
+import Products from './secure/products/Products';
 import ProductsCreate from './secure/products/ProductCreate';
 
 function App() {
@@ -30,7 +30,7 @@ function App() {
         <Route  path={'/roles'} exact component={Roles} />
         <Route  path={'/roles/create'} component={RoleCreate} />
         <Route  path={'/roles/:id/edit'} component={RoleEdit} />
-        <Route  path={'/products'} exact component={products} />
+        <Route  path={'/products'} exact component={Products} />
         <Route  path={'/products/create'} component={ProductsCreate} />
       </BrowserRouter>
     </div>

@@ -6,7 +6,7 @@ import { Product } from '../../classes/products';
 import Paginator from '../components/Paginator';
 import Deleter from '../components/Deleter';
 
-export default class products extends Component {
+export default class Products extends Component {
     state={
         products: []
     }
