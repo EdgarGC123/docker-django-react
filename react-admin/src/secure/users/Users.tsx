@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { User } from '../../classes/user';
 import { Link } from 'react-router-dom';
+import Paginator from '../components/Paginator';
+import Deleter from '../components/Deleter';
 
 export default class Users extends Component {
     state = {
@@ -23,26 +25,19 @@ export default class Users extends Component {
 
     }
 
-    next = async () => {
-        if(this.page === this.last_page) return;
-        this.page++;
-        await this.componentDidMount();
-    }
-    previous = async () =>{
-        if(this.page === 1 ) return;
-        this.page--;
-        await this.componentDidMount();
+    handleDelete = async (id: number) =>{
+        // this.setState({
+        //     users: this.state.users.filter((u: User) => u.id !== id)
+        // })
+
+        
+        this.componentDidMount();
     }
 
-    delete = async (id: number) =>{
-        if(window.confirm('Are you sure you want to delete this record?')){
-            await axios.delete(`users/${id}`);
+    handlePageChange = async (page: number) =>{
+        this.page = page;
 
-            // this.setState({
-            //     users: this.state.users.filter((u: User) => u.id !== id)
-            // })
-            this.componentDidMount();
-        }
+        await this.componentDidMount
     }
 
     render() {
@@ -74,7 +69,7 @@ export default class Users extends Component {
                                 <td>
                                     <div className="bt-group mr-2">
                                         <Link to={`/users/${user.id}/edit`} className="btn btn-sm btn-outline-secondary">Edit</Link>
-                                        <a className="btn btn-sm btn-outline-secondary" onClick={() => this.delete(user.id)} >Delete</a>
+                                        <Deleter id={user.id} endpoint={'users'} handleDelete={this.handleDelete}/>
                                     </div>
                                 </td>
                             </tr>
@@ -82,16 +77,7 @@ export default class Users extends Component {
                     </tbody>
                   </table>
                   </div>
-                  <nav>
-                      <ul className="pagination">
-                          <li className="page-item">
-                            <a className="page-link" onClick={this.previous}>Previous</a>
-                          </li>
-                          <li className="page-item">
-                            <a className="page-link" onClick={this.next}>Next</a>
-                          </li>
-                      </ul>
-                  </nav>
+                <Paginator lastPage={this.last_page} handlePageChange={this.handlePageChange}/>
             </Wrapper>
         )
     }

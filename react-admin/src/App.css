@@ -107,6 +107,10 @@ body {
 	left: 25vw;
 	top: 10vh;
 }
+.prevnextbtns {
+	position: absolute;
+	top: 100%;
+}
 /* .navbar {
 	width: 100vw;
 	margin: 0 auto;

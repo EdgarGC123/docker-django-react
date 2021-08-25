@@ -3,28 +3,37 @@ import { Link } from 'react-router-dom'
 import Wrapper from '../Wrapper'
 import axios from 'axios';
 import { Product } from '../../classes/products';
+import Paginator from '../components/Paginator';
+import Deleter from '../components/Deleter';
 
 export default class products extends Component {
     state={
         products: []
     }
+    page = 1;
+    last_page = 0;
     componentDidMount = async () => {
-        const response = await axios.get('products');
+        const response = await axios.get(`products?page=${this.page}`);
 
         console.log('PRODUCTS',response.data.data)
 
         this.setState({
             products: response.data.data
         })
+
+        this.last_page = response.data.meta.last_page
     }
 
-    delete = async (id: number) =>{
-        if(window.confirm('Are you sure you want to delete this record?')){
-            await axios.delete(`products/${id}`);
-            
-            this.componentDidMount();
-        }
+    handleDelete = async (id: number) =>{
+        await this.componentDidMount()
     }
+
+    handlePageChange = async (page: number) =>{
+        this.page = page;
+
+        await this.componentDidMount()
+    }
+    
     
     render() {
         return (
@@ -59,7 +68,8 @@ export default class products extends Component {
                                         <td>
                                             <div className="bt-group mr-2">
                                             <Link to={`/products/${product.id}/edit`} className="btn btn-sm btn-outline-secondary">Edit</Link>
-                                            <a className="btn btn-sm btn-outline-secondary" onClick={()=> this.delete(product.id)}>Delete</a>                              </div>
+                                            <Deleter id={product.id} endpoint={'products'} handleDelete={this.handleDelete}/>
+                                            </div>
                                         </td>
                                     </tr>
                                 )
@@ -68,6 +78,8 @@ export default class products extends Component {
                     </tbody>
                   </table>
                 </div>
+
+                <Paginator lastPage={this.last_page} handlePageChange={this.handlePageChange}/>
             </Wrapper>
         )
     }
