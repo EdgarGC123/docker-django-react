@@ -64,7 +64,7 @@ export default class products extends Component {
                                         <td><img src={product.image} width="50"/></td>
                                         <td>{product.title}</td>
                                         <td>{product.description}</td>
-                                        <td>{product.price}</td>
+                                        <td>${product.price}</td>
                                         <td>
                                             <div className="bt-group mr-2">
                                             <Link to={`/products/${product.id}/edit`} className="btn btn-sm btn-outline-secondary">Edit</Link>

@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom';
 
 export default class ProductsCreate extends Component {
     state = {
+        image: '',
         redirect: false
     }
     title = '';
@@ -23,6 +24,23 @@ export default class ProductsCreate extends Component {
 
         this.setState({
             redirect: true
+        })
+    }
+    upload = async (files: FileList | null) => {
+        if(files === null) return;
+
+        const data = new FormData();
+        console.log('upload files variable', files);
+        console.log('instance of FormData', data)
+        data.append('image', files[0]);
+        console.log('instance of FormData after append', data)
+        const response = await axios.post('upload', data);
+        console.log('UPLOAD IMAGE response', response)
+
+        this.image = response.data.url;
+
+        this.setState({
+            image: this.image
         })
     }
 
@@ -46,10 +64,10 @@ export default class ProductsCreate extends Component {
                     <div className="form-group">
                         <label>Image</label>
                         <div className="input-group">
-                            <input type="text" className="for-control" name="image" onChange={e => this.image = e.target.value}/>
+                            <input type="text" className="for-control" name="image" value={this.image = this.state.image} onChange={e => this.image = e.target.value}/>
                             <div className="input-group-append">
                                 <label className="btn btn-primary">
-                                    Upload <input type="file" hidden/>
+                                    Upload <input type="file" hidden onChange={e => this.upload(e.target.files)}/>
                                 </label>
                             </div>
                         </div>
