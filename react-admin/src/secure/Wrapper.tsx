@@ -17,7 +17,6 @@ export default class Wrapper extends Component {
                 redirect: true
             })
         }
-
     }
     render() {
         if(this.state.redirect){

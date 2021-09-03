@@ -54,11 +54,11 @@ export default class Roles extends Component {
                                         <td>{role.name}</td>
                                         <td>
                                             <div className="bt-group mr-2">
-                                            <Link to={`/roles/${role.id}/edit`} className="btn btn-sm btn-outline-secondary">Edit</Link>
-                                            {role.id === 1 || role.id === 2 || role.id === 3 ?
-                                                null : 
-                                                <Deleter id={role.id} endpoint={'roles'} handleDelete={this.handleDelete}/>
-                                            }
+                                                <Link to={`/roles/${role.id}/edit`} className="btn btn-sm btn-outline-secondary">Edit</Link>
+                                                {role.id === 1 || role.id === 2 || role.id === 3 ?
+                                                    null : 
+                                                    <Deleter id={role.id} endpoint={'roles'} handleDelete={this.handleDelete}/>
+                                                }
                                             </div>
                                         </td>
                                     </tr>
