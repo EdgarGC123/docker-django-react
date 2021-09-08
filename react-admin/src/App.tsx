@@ -16,24 +16,26 @@ import RoleEdit from './secure/roles/RoleEdit';
 import Products from './secure/products/Products';
 import ProductsCreate from './secure/products/ProductCreate';
 import ProductEdit from './secure/products/ProductEdit';
+import Orders from './secure/orders/Orders';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Route  path={'/'} exact component={RedirectToDashboard} />
-        <Route  path={'/dashboard'} exact component={Dashboard} />
-        <Route  path={'/users'} exact component={Users} />
-        <Route  path={'/login'} exact component={Login} />
-        <Route  path={'/register'} exact component={Register} />
-        <Route  path={'/users/create'} component={UserCreate} />
-        <Route  path={'/users/:id/edit'} component={UserEdit} />
-        <Route  path={'/roles'} exact component={Roles} />
-        <Route  path={'/roles/create'} component={RoleCreate} />
-        <Route  path={'/roles/:id/edit'} component={RoleEdit} />
-        <Route  path={'/products'} exact component={Products} />
-        <Route  path={'/products/create'} component={ProductsCreate} />
-        <Route  path={'/products/:id/edit'} component={ProductEdit} />
+        <Route path={'/'} exact component={RedirectToDashboard} />
+        <Route path={'/dashboard'} exact component={Dashboard} />
+        <Route path={'/users'} exact component={Users} />
+        <Route path={'/login'} exact component={Login} />
+        <Route path={'/register'} exact component={Register} />
+        <Route path={'/users/create'} component={UserCreate} />
+        <Route path={'/users/:id/edit'} component={UserEdit} />
+        <Route path={'/roles'} exact component={Roles} />
+        <Route path={'/roles/create'} component={RoleCreate} />
+        <Route path={'/roles/:id/edit'} component={RoleEdit} />
+        <Route path={'/products'} exact component={Products} />
+        <Route path={'/products/create'} component={ProductsCreate} />
+        <Route path={'/products/:id/edit'} component={ProductEdit} />
+        <Route path={'/orders'} exact component={Orders} />
       </BrowserRouter>
     </div>
   );

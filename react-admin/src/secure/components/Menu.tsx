@@ -26,6 +26,11 @@ const Menu = () => (
               Products
             </NavLink>
           </li>
+          <li>
+            <NavLink className="nav-link" to={'/orders'}>
+              Orders
+            </NavLink>
+          </li>
         </ul>
       </div>
     </nav>
