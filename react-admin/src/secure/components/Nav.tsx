@@ -1,12 +1,22 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import {Redirect} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
+import { User } from '../../classes/user';
 
 export default class Nav extends Component {
   state = {
+    user: new User(),
     redirect: false
   }
 
+  componentDidMount = async () => {
+    const response = await axios.get('user');
+
+    this.setState({
+      user: response.data.data
+    })
+  }
+  
   handleClick = async () =>{
     
     await axios.post('logout', {})
@@ -20,6 +30,8 @@ export default class Nav extends Component {
     if(this.state.redirect){
       return (<Redirect to={'/login'}/>);
     }
+    const fname = this.state.user.first_name;
+    const lname = this.state.user.last_name;
     return (
       <nav className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
         <a className="navbar-brand col-md-3 col-lg-2 mr-0 px-3">Company name</a>
@@ -27,10 +39,9 @@ export default class Nav extends Component {
         <span className="navbar-toggler-icon"></span>
       </button>
       <input className="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"/> */}
-        <ul className="navbar-nav px-3">
-          <li className="nav-item text-nowrap">
-            <a className="nav-link" onClick={this.handleClick}>Sign out</a>
-          </li>
+        <ul className="my-2 my-md-0 mr-md-3">
+            <Link to={'/profile'} className="p-2 text-white">{fname} {lname}</Link>
+            <a className="p-2 text-white" onClick={this.handleClick}>Sign out</a>
         </ul>
       </nav>
     )

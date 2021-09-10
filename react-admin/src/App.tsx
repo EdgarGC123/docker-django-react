@@ -18,6 +18,7 @@ import ProductsCreate from './secure/products/ProductCreate';
 import ProductEdit from './secure/products/ProductEdit';
 import Orders from './secure/orders/Orders';
 import OrderItems from './secure/orders/OrderItems';
+import Profile from './secure/profile/Profile';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
       <BrowserRouter>
         <Route path={'/'} exact component={RedirectToDashboard} />
         <Route path={'/dashboard'} exact component={Dashboard} />
+        <Route path={'/profile'} exact component={Profile} />
         <Route path={'/users'} exact component={Users} />
         <Route path={'/login'} exact component={Login} />
         <Route path={'/register'} exact component={Register} />
