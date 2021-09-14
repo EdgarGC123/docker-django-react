@@ -204,7 +204,9 @@ class ProfilePasswordAPIView(APIView):
         if request.data['password'] != request.data['password_confirm']:
             raise exceptions.ValidationError('Passwords do not match!')
 
-        serializer = UserSerializer(user, data=request.data, partial=True)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
+        # serializer = UserSerializer(user, data=request.data, partial=True)
+        # serializer.is_valid(raise_exception=True)
+        user.set_password(request.data['password'])
+        user.save()
+        serializer = UserSerializer(user)
         return Response(serializer.data)
