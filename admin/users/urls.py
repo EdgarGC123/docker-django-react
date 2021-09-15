@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 
-from .views import PermissionAPIView, ProfileInfoApIView, ProfilePasswordAPIView, register, login, AuthenticatedUser, logout, RoleViewSet, UserGenericAPIView  # users
+from .views import PermissionAPIView, ProfileInfoAPIView, ProfilePasswordAPIView, register, login, AuthenticatedUser, logout, RoleViewSet, UserGenericAPIView  # users
 
 urlpatterns = [
     # path('users', users),
@@ -20,7 +20,7 @@ urlpatterns = [
         'delete': 'destroy'
     })),
     path('users/password', ProfilePasswordAPIView.as_view()),
-    path('users/info', ProfileInfoApIView.as_view()),
+    path('users/info', ProfileInfoAPIView.as_view()),
     path('users', UserGenericAPIView.as_view()),
     path('users/<str:pk>', UserGenericAPIView.as_view()),
 ]

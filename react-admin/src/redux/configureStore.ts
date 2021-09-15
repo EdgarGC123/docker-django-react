@@ -1,4 +1,4 @@
-import { configure } from '@testing-library/react';
+// import { configure } from '@testing-library/react';
 import {createStore} from 'redux';
 import setUserReducer from './reducers/setUserReducer';
 

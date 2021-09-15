@@ -16,12 +16,12 @@ export default class Users extends Component {
     componentDidMount = async () => {
         const response = await axios.get(`users?page=${this.page}`);
 
-        console.log(response)
+        this.last_page = response.data.meta.last_page
+        
         this.setState({
             users: response.data.data
         })
 
-        this.last_page = response.data.meta.last_page
 
     }
 
@@ -37,7 +37,7 @@ export default class Users extends Component {
     handlePageChange = async (page: number) =>{
         this.page = page;
 
-        await this.componentDidMount
+        await this.componentDidMount();
     }
 
     render() {

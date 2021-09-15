@@ -22,7 +22,7 @@ export default class RoleCreate extends Component {
     }
 
     check =(id: number)=>{
-        if(this.selected.filter(s => s == id).length > 0){
+        if(this.selected.filter(s => s === id).length > 0){
             this.selected = this.selected.filter(s => s !==id)
             return;
         }

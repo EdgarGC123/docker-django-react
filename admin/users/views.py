@@ -182,7 +182,7 @@ class UserGenericAPIView(generics.GenericAPIView, mixins.ListModelMixin, mixins.
         return self.destroy(request, pk)
 
 
-class ProfileInfoApIView(APIView):
+class ProfileInfoAPIView(APIView):
     authenticateion_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 

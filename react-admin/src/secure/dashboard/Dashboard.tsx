@@ -32,8 +32,6 @@ class Dashboard extends Component {
 
     const records: {date: string, sum: number}[] = response.data.data;
 
-    console.log(records)
-
     chart.load({
       columns:[
         ['x', ...records.map(record => record.date)],

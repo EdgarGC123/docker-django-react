@@ -10,10 +10,9 @@ export default class Deleter extends Component<{id: number, endpoint: string, ha
         this.props.handleDelete(this.props.id);
     }
     render() {
-        return (
-        <a className="btn btn-sm btn-outline-secondary" onClick={()=> this.delete()}>
+        return <a className="btn btn-sm btn-outline-secondary" onClick={()=> this.delete()}>
             Delete
         </a> 
-        )
+        
     }
 }

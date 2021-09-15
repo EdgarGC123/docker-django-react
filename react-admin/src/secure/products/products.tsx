@@ -14,14 +14,13 @@ export default class Products extends Component {
     last_page = 0;
     componentDidMount = async () => {
         const response = await axios.get(`products?page=${this.page}`);
-
-        console.log('PRODUCTS',response.data.data)
+        
+        this.last_page = response.data.meta.last_page
 
         this.setState({
             products: response.data.data
         })
 
-        this.last_page = response.data.meta.last_page
     }
 
     handleDelete = async (id: number) =>{
@@ -61,7 +60,7 @@ export default class Products extends Component {
                                 return (
                                     <tr key={product.id}>
                                         <td>{product.id}</td>
-                                        <td><img src={product.image} width="50"/></td>
+                                        <td><img src={product.image} width="50" alt={`${product.id}-prodId`}/></td>
                                         <td>{product.title}</td>
                                         <td>{product.description}</td>
                                         <td>${product.price}</td>

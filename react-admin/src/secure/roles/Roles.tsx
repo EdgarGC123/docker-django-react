@@ -1,4 +1,4 @@
-import React, { Component, SyntheticEvent } from 'react';
+import React, { Component } from 'react';
 import Wrapper from '../Wrapper';
 import axios from 'axios';
 import { Role } from '../../classes/role';
@@ -12,9 +12,6 @@ export default class Roles extends Component {
 
     componentDidMount = async () => {
         const response = await axios.get('roles');
-        console.log('ROLES response',response.data);
-
-
 
         this.setState({
             roles: response.data.data

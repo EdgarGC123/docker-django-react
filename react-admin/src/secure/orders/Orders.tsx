@@ -4,7 +4,6 @@ import axios from 'axios';
 import { Order } from '../../classes/order';
 import { Link } from 'react-router-dom';
 import Paginator from '../components/Paginator';
-import { lstat } from 'fs';
 
 export default class Orders extends Component {
     state = {

@@ -2,20 +2,21 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import {Link, Redirect} from 'react-router-dom'
 import { User } from '../../classes/user';
+import { connect } from 'react-redux';
 
-export default class Nav extends Component {
+class Nav extends Component<{user: User}> {
   state = {
-    user: new User(),
+    // user: new User(),
     redirect: false
   }
 
-  componentDidMount = async () => {
-    const response = await axios.get('user');
+  // componentDidMount = async () => {
+  //   const response = await axios.get('user');
 
-    this.setState({
-      user: response.data.data
-    })
-  }
+  //   this.setState({
+  //     user: response.data.data
+  //   })
+  // }
   
   handleClick = async () =>{
     
@@ -30,8 +31,8 @@ export default class Nav extends Component {
     if(this.state.redirect){
       return (<Redirect to={'/login'}/>);
     }
-    const fname = this.state.user.first_name;
-    const lname = this.state.user.last_name;
+    const fname = this.props.user.first_name;
+    const lname = this.props.user.last_name;
     return (
       <nav className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
         <a className="navbar-brand col-md-3 col-lg-2 mr-0 px-3">Company name</a>
@@ -47,3 +48,6 @@ export default class Nav extends Component {
     )
   }
 }
+
+// @ts-ignore
+export default connect(state => ({user: state.user}))(Nav);
