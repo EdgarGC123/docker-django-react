@@ -183,7 +183,7 @@ class UserGenericAPIView(generics.GenericAPIView, mixins.ListModelMixin, mixins.
 
 
 class ProfileInfoAPIView(APIView):
-    authenticateion_classes = [JWTAuthentication]
+    authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
     def put(self, request, pk=None):

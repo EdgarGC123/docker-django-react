@@ -10,7 +10,7 @@ from rest_framework import exceptions
 def generate_access_token(user):
     payload = {
         'user_id': user.id,
-        'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
+        'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=300),
         'iat': datetime.datetime.utcnow()
     }
 

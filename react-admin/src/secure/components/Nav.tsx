@@ -31,8 +31,7 @@ class Nav extends Component<{user: User}> {
     if(this.state.redirect){
       return (<Redirect to={'/login'}/>);
     }
-    const fname = this.props.user.first_name;
-    const lname = this.props.user.last_name;
+    const fullName = this.props.user.name;
     return (
       <nav className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
         <a className="navbar-brand col-md-3 col-lg-2 mr-0 px-3">Company name</a>
@@ -41,7 +40,7 @@ class Nav extends Component<{user: User}> {
       </button>
       <input className="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"/> */}
         <ul className="my-2 my-md-0 mr-md-3">
-            <Link to={'/profile'} className="p-2 text-white">{fname} {lname}</Link>
+            <Link to={'/profile'} className="p-2 text-white">{fullName}</Link>
             <a className="p-2 text-white" onClick={this.handleClick}>Sign out</a>
         </ul>
       </nav>

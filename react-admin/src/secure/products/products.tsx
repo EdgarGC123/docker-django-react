@@ -5,8 +5,10 @@ import axios from 'axios';
 import { Product } from '../../classes/products';
 import Paginator from '../components/Paginator';
 import Deleter from '../components/Deleter';
+import { connect } from 'react-redux';
+import { User } from '../../classes/user';
 
-export default class Products extends Component {
+class Products extends Component<{user: User}> {
     state={
         products: []
     }
@@ -20,7 +22,6 @@ export default class Products extends Component {
         this.setState({
             products: response.data.data
         })
-
     }
 
     handleDelete = async (id: number) =>{
@@ -32,16 +33,30 @@ export default class Products extends Component {
 
         await this.componentDidMount()
     }
-    
+    actions = (id: number) =>{
+        if(this.props.user.canEdit('users')){
+            return (
+                <div className="bt-group mr-2">
+                <Link to={`/products/${id}/edit`} className="btn btn-sm btn-outline-secondary">Edit</Link>
+                <Deleter id={id} endpoint={'products'} handleDelete={this.handleDelete}/>
+                </div>
+            )
+        }
+    }
     
     render() {
+        let addButton = null;
+
+        if(this.props.user.canEdit('products')){
+            addButton = <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <div className="btn-toolbar mb-2 mb-md-0">
+                    <Link to={"/products/create"} className="btn btn-sm btn-outline-secondary">Add</Link>
+                </div>
+            </div>
+        }
         return (
             <Wrapper>
-                <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <div className="btn-toolbar mb-2 mb-md-0">
-                        <Link to={"/products/create"} className="btn btn-sm btn-outline-secondary">Add</Link>
-                    </div>
-                </div>
+                {addButton}
                 <div className="table-responsive">
                   <table className="table table-striped table-sm">
                     <thead>
@@ -64,11 +79,7 @@ export default class Products extends Component {
                                         <td>{product.title}</td>
                                         <td>{product.description}</td>
                                         <td>${product.price}</td>
-                                        <td>
-                                            <div className="bt-group mr-2">
-                                            <Link to={`/products/${product.id}/edit`} className="btn btn-sm btn-outline-secondary">Edit</Link>
-                                            <Deleter id={product.id} endpoint={'products'} handleDelete={this.handleDelete}/>
-                                            </div>
+                                        <td>{this.actions(product.id)}
                                         </td>
                                     </tr>
                                 )
@@ -83,3 +94,6 @@ export default class Products extends Component {
         )
     }
 }
+
+//@ts-ignore
+export default connect(state => ({user: state.user}))(Products)
